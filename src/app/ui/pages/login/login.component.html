@@ -1,0 +1,49 @@
+<div class="container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" class="centered-form">
+        <mat-form-field>
+          <mat-label>Correo electrónico</mat-label>
+          <input
+            matInput
+            placeholder="ejemplo@email.com"
+            formControlName="email"
+            required
+            aria-label="Correo electrónico para iniciar sesión"
+          />
+          <mat-error *ngIf="formControl['email'].invalid">{{
+            getErrorMessage("email")
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="********"
+            formControlName="password"
+            required
+            aria-label="Contraseña para iniciar sesión"
+          />
+          <mat-error *ngIf="formControl['password'].invalid">{{
+            getErrorMessage("password")
+          }}</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Iniciar sesión
+        </button>
+
+        <p class="create-account-link">
+          ¿No tienes una cuenta?
+          <a routerLink="/sing-in">Crea una cuenta gratis</a>
+        </p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

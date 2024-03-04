@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <section routerLink="/" class="logo-section">
+    <mat-icon class="logo-icon">blur_on</mat-icon>
+    <h1 class="title">Kanban Go</h1>
+  </section>
+
+  <span class="spacer"></span>
+
+  <span *ngIf="isLoggedIn">{{ user?.email }}</span>
+
+  <a *ngIf="!isLoggedIn" mat-button class="text-button" routerLink="/login"
+    >Iniciar sesión</a
+  >
+  <a *ngIf="!isLoggedIn" mat-button class="text-button" routerLink="/sing-in"
+    >Registrarse</a
+  >
+
+  <a *ngIf="isLoggedIn" mat-button class="text-button" (click)="logout()"
+    >Cerrar sesión</a
+  >
+</mat-toolbar>

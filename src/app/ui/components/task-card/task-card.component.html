@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ modalTitle }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="taskForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Título</mat-label>
+          <input
+            matInput
+            placeholder="Agrega un título"
+            formControlName="title"
+            required
+            aria-label="Título de la tarea"
+          />
+          <mat-error *ngIf="taskForm.get('title')?.invalid">{{
+            getErrorMessage("title")
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            placeholder="Agrega una descripción"
+            formControlName="description"
+            required
+            aria-label="Descripción de la tarea"
+          ></textarea>
+          <mat-error *ngIf="taskForm.get('description')?.invalid">{{
+            getErrorMessage("description")
+          }}</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Crear</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

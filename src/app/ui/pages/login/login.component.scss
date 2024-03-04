@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ajusta el alto del contenedor al 100% de la altura visible del navegador */
+}
+
+.login-card {
+  width: 400px; /* Ajusta el ancho de la tarjeta según sea necesario */
+  padding: 20px;
+}
+
+.centered-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para hacer que los elementos se apilen verticalmente */
+mat-form-field {
+  display: block;
+  margin-bottom: 10px; /* Espacio entre campos de entrada */
+  width: 100%;
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #3f51b5;
+}
+
+mat-card-title {
+  margin-bottom: 20px;
+}

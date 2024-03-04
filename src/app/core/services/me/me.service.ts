@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/app/environment/environment';
+import { checkToken } from '@core/interceptors/token.interceptor';
+import { User } from '@domain/models/user/user.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class MeService {
+  apiUrl = environment.API_URL;
+
+  constructor(private http: HttpClient) {}
+
+  getMeProfile() {
+    return this.http.get<User>(`${this.apiUrl}/api/v1/me/profile`, {
+      context: checkToken(),
+    });
+  }
+
+  getMeBoards() {
+    return this.http.get<User>(`${this.apiUrl}/api/v1/me/boards`, {
+      context: checkToken(),
+    });
+  }
+}
