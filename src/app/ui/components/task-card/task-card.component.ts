@@ -12,8 +12,6 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { TaskGateway } from 'src/app/domain/models/task/gateway/task.gateway';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-task-card',
