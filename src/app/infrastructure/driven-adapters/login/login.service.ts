@@ -8,7 +8,7 @@ import { Login } from 'src/app/domain/models/login/login.model';
   providedIn: 'root',
 })
 export class LoginService extends LoginGateway {
-  url: string = 'localhost:4000/api/auth/login';
+  url: string = 'http://localhost:4000/api/auth/login';
 
   constructor(private httpClient: HttpClient) {
     super();

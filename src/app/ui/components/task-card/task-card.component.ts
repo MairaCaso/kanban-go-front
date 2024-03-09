@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +12,9 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatOptionModule } from '@angular/material/core';
+import { Task } from '@domain/models/task/task.model';
 
 @Component({
   selector: 'app-task-card',
@@ -25,23 +28,45 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
+    MatOptionModule,
+    FormsModule,
   ],
   templateUrl: './task-card.component.html',
   styleUrls: ['./task-card.component.scss'],
 })
-export class TaskCardComponent {
+export class TaskCardComponent implements OnInit {
   @Input() modalTitle: string = '';
-  taskForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.email]],
-    description: ['', [Validators.required, Validators.minLength(10)]],
-  });
+  taskForm: FormGroup = new FormGroup({});
+
+  @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
+
+  STATUS_OPTIONS = [
+    { value: 'Pendiente', label: 'Pendiente' },
+    { value: 'Activa', label: 'Activa' },
+    { value: 'Finalizada', label: 'Finalizada' },
+  ];
 
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<TaskCardComponent>
+  ) {}
+
+  ngOnInit(): void {
+    this.loadForm();
+  }
 
   get formControl() {
     return this.taskForm.controls;
+  }
+
+  loadForm() {
+    this.taskForm = this.fb.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      status: [''],
+    });
   }
 
   getErrorMessage(controlName: string) {
@@ -52,26 +77,20 @@ export class TaskCardComponent {
       : '';
   }
 
-  onSubmit() {
-    // if (this.taskForm.valid) {
-    //   this._taskGateway
-    //     .create(this.taskForm.value)
-    //     .pipe(
-    //       catchError((error) => {
-    //         this.handleLoginError(error);
-    //         return throwError(() => new Error('No fue posible crear la tarea'));
-    //       })
-    //     )
-    //     .subscribe({
-    //       next: (value) => {
-    //         this.handleSuccessfulLogin(value);
-    //       },
-    //       error: (error) => {
-    //         console.error('Login error:', error);
-    //         this.displayLoginError();
-    //       },
-    //     });
-    // }
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    if (this.taskForm.valid) {
+      this.formSubmit.emit(this.taskForm.value);
+      this.dialogRef.close();
+    }
+  }
+
+  editStatus(newStatus: string) {
+    this.formControl['status'].setValue(newStatus);
+  }
+
+  onCloseDialog() {
+    this.dialogRef.close();
   }
 
   handleLoginError(error: any) {

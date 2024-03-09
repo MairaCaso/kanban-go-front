@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ResponseTask } from '@domain/models/general/response/response.model';
+import { TaskDTO } from '@domain/models/task/task-DTO.model';
 import { Observable } from 'rxjs';
 import { TaskGateway } from 'src/app/domain/models/task/gateway/task.gateway';
 import { Task } from 'src/app/domain/models/task/task.model';
@@ -8,24 +10,23 @@ import { Task } from 'src/app/domain/models/task/task.model';
   providedIn: 'root',
 })
 export class TaskService extends TaskGateway {
-  url: string = 'localhost:4000/api/task';
+  url: string = 'http://localhost:4000/api/task';
 
   constructor(private httpClient: HttpClient) {
     super();
   }
 
-  getById(id: string): Observable<Task> {
-    return this.httpClient.get<Task>(`${this.url}/${id}`);
+  getById(id: string): Observable<ResponseTask> {
+    return this.httpClient.get<ResponseTask>(`${this.url}/${id}`);
   }
-  getAll(): Observable<Task[]> {
-    return this.httpClient.get<Task[]>(this.url);
+  getAll(): Observable<ResponseTask[]> {
+    return this.httpClient.get<ResponseTask[]>(this.url);
   }
-  create(task: Task): Observable<Task> {
-    return this.httpClient.post<Task>(this.url, task);
+  create(task: TaskDTO): Observable<ResponseTask> {
+    return this.httpClient.post<ResponseTask>(this.url, task);
   }
-
-  update(id: string, task: Task): Observable<Task> {
-    return this.httpClient.put<Task>(`${this.url}/${id}`, task);
+  update(id: string, task: TaskDTO): Observable<ResponseTask> {
+    return this.httpClient.put<ResponseTask>(`${this.url}/${id}`, task);
   }
   delete(id: string): Observable<any> {
     return this.httpClient.delete<Task>(`${this.url}/${id}`);

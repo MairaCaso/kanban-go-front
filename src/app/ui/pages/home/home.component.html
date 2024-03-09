@@ -5,7 +5,12 @@
       Prueba nuestra app de gestión de tareas tipo Kanban y lleva tu
       productividad al siguiente nivel.
     </p>
-    <a mat-raised-button color="primary" routerLink="/login">Comenzar ahora</a>
+    <a
+      mat-raised-button
+      color="primary"
+      [routerLink]="(path$ | async) ? '/board' : '/login'"
+      >Comenzar ahora</a
+    >
   </div>
 
   <div class="features-section">

@@ -35,7 +35,12 @@
           }}</mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="onSubmit()"
+        >
           Iniciar sesión
         </button>
 

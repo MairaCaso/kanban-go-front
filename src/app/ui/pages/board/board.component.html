@@ -1,27 +1,24 @@
 <div class="add-task-button">
-  <button mat-fab (click)="openTaskModal(false, null, null)">
+  <button mat-fab (click)="openTaskModal('CREATE')">
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
-<div class="kanban-container">
-  <mat-card class="kanban-column" *ngFor="let column of columns">
-    <h2>{{ column.title }}</h2>
-    <div class="kanban-column-content">
-      <mat-card *ngFor="let task of column.tasks">
-        <mat-card-header>
-          <mat-card-title>{{ task.title }}</mat-card-title>
-          <div class="task-buttons">
-            <button mat-icon-button (click)="openTaskModal(true, column, task)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteTask(column, task)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </mat-card-header>
-        <mat-card-content>{{ task.description }}</mat-card-content>
-      </mat-card>
-    </div>
+<div>
+  <mat-card *ngFor="let task of tasks$ | async">
+    <mat-card-header>
+      <mat-card-title>{{ task.title }}</mat-card-title>
+      <div class="task-buttons">
+        <button mat-icon-button (click)="openTaskModal('UPDATE', task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTask(task._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>{{ task.description }}</mat-card-content>
+
+    <mat-card-content>{{ task.status }}</mat-card-content>
   </mat-card>
 </div>

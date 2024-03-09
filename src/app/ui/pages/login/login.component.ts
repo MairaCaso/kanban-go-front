@@ -16,6 +16,7 @@ import { catchError, throwError } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from 'src/app/infrastructure/driven-adapters/login/login.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from 'src/app/infrastructure/common/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private _loginGateway: LoginGateway,
-    private _router: Router
+    private _router: Router,
+    private _authService: AuthService
   ) {}
 
   get formControl() {
@@ -101,7 +103,8 @@ export class LoginComponent {
     // Store user data or token in local storage
     localStorage.setItem('userToken', value.token);
 
-    this._router.navigate(['/home']);
+    this._router.navigate(['/board']);
+    this._authService.currentUser();
   }
 
   displayLoginError() {

@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs';
-import { Task } from '../task.model';
 import { TaskDTO } from '../task-DTO.model';
+import { ResponseTask } from '@domain/models/general/response/response.model';
 
 export abstract class TaskGateway {
-  abstract getById(id: string): Observable<Task>;
-  abstract getAll(): Observable<Array<Task>>;
-  abstract create(task: TaskDTO): Observable<Task>;
-  abstract update(id: string, task: Task): Observable<Task>;
-  abstract delete(id: string): Observable<{ success: string; msg: string }>;
+  abstract getById(id: string): Observable<ResponseTask>;
+  abstract getAll(): Observable<Array<ResponseTask>>;
+  abstract create(task: TaskDTO): Observable<ResponseTask>;
+  abstract update(id: string, task: TaskDTO): Observable<ResponseTask>;
+  abstract delete(id: string): Observable<{ msg: string }>;
 }

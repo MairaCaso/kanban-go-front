@@ -16,12 +16,12 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('userToken');
     return !!token && !this.jwtHelper.isTokenExpired(token);
   }
 
   public currentUser(): void {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('userToken');
     if (token) {
       const decodedUser = this.jwtHelper.decodeToken(token);
       this.currentUserSubject.next(decodedUser);

@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
 import { TaskGateway } from '../../models/task/gateway/task.gateway';
-import { Task } from '../../models/task/task.model';
+import { ResponseTask } from '@domain/models/general/response/response.model';
 
-export class GetAlbumUseCases {
+export class GetTasksUseCases {
   constructor(private _taskGateway: TaskGateway) {}
-  getTaskById(id: string): Observable<Task> {
+  getTaskById(id: string): Observable<ResponseTask> {
     return this._taskGateway.getById(id);
   }
-  getAllTask(): Observable<Array<Task>> {
+  getAllTask(): Observable<ResponseTask[]> {
     return this._taskGateway.getAll();
   }
 }
