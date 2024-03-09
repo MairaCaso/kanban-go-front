@@ -25,7 +25,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  path$: Observable<boolean> = this.authService.currentUser$;
+  isLoggedIn$: Observable<boolean> = this.authService.currentUser$;
 
   constructor(private authService: AuthService) {}
 }

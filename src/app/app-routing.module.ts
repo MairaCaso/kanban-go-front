@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
+import { isUserLogged } from '@core/guards/is-logged.guard';
 
 const routes: Routes = [
   {
@@ -15,11 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [isUserLogged],
     loadComponent: () =>
       import('./ui/pages/login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'sing-in',
+    canActivate: [isUserLogged],
     loadComponent: () =>
       import('./ui/pages/sing-in/sing-in.component').then(
         (m) => m.SingInComponent
@@ -28,7 +31,7 @@ const routes: Routes = [
 
   {
     path: 'board',
-    // canActivate: [ AuthGuard ],
+    canActivate: [AuthGuard],
     loadComponent: () =>
       import('./ui/pages/board/board.component').then((m) => m.BoardComponent),
   },

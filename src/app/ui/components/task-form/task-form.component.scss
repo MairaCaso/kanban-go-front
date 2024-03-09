@@ -1,0 +1,29 @@
+.centered-form {
+  margin-top: 20px; /* Espacio entre el título y el formulario */
+  width: 100%; /* Asegura que el formulario ocupe todo el ancho de la tarjeta */
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* Estilos para hacer que los elementos se apilen verticalmente */
+mat-form-field {
+  display: block;
+  margin-bottom: 20px; /* Espacio entre campos de entrada */
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  button {
+    width: 100%;
+    margin: 10px;
+  }
+}

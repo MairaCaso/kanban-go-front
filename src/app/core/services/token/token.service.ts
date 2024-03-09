@@ -9,28 +9,28 @@ export class TokenService {
   constructor() {}
 
   saveToken(token: string) {
-    setCookie('token-trello', token, { expires: 365, path: '/' });
+    setCookie('userToken', token, { expires: 365, path: '/' });
   }
 
   getToken() {
-    const token = getCookie('token-trello');
+    const token = getCookie('userToken');
     return token;
   }
 
   removeToken() {
-    removeCookie('token-trello');
+    removeCookie('userToken');
   }
 
   removeRefreshToken() {
-    removeCookie('refresh-token-trello');
+    removeCookie('refresh-userToken');
   }
 
   saveRefreshToken(token: string) {
-    setCookie('refresh-token-trello', token, { expires: 365, path: '/' });
+    setCookie('refresh-userToken', token, { expires: 365, path: '/' });
   }
 
   getRefreshToken() {
-    const token = getCookie('refresh-token-trello');
+    const token = getCookie('refresh-userToken');
     return token;
   }
 
